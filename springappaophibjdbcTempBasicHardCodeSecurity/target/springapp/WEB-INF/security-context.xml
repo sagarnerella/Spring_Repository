@@ -1,0 +1,27 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <!-- we will be defining all the security configuration in this file -->
+    <http use-expressions="true">
+    
+    <intercept-url pattern="/**" access="isAuthenticated()"/><!-- this means all the URL in this application will be checked if user is aunthenticated  -->
+    <form-login/><!-- we will use the build in form login page in spring -->
+    <logout logout-url="/logout" logout-success-url="/login"/> <!-- the logout url we will use in jsp -->
+    </http>
+    
+    <authentication-manager>
+    <authentication-provider>
+                          <!-- Normally in this part, we can declare the source of our user
+                          But for smiplicity we will hard-code the users, so that its very usefull while testing setup -->
+    
+    <user-service>
+    <user name="sagar" password="sagar" authorities="Admin,User"/>
+    <user name="srisailam" password="srisailam" authorities="User"/>
+    </user-service>
+    </authentication-provider>
+    </authentication-manager>
+</beans:beans>
