@@ -1,0 +1,49 @@
+<html ng-app="springapp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>AngularJS Task Manager</title>
+<link href='./css/style.css' rel="stylesheet" type="text/css"></link>
+<link href='./css/css/font-awesome.css' rel="stylesheet" type="text/css"></link>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+
+
+
+
+
+
+
+
+<script src="scripts/angular.js"></script>
+<script src="scripts/angular-route.js"></script>
+  <!-- <script data-require="angular-animate@*" data-semver="1.2.13" src="http://code.angularjs.org/1.2.13/angular-animate.js"></script> -->
+  
+  <!-- ngDailogbox configuration starts here -->
+  <link rel="stylesheet" href="./ngDailog/ngDialog.css">
+  <link rel="stylesheet" href="./ngDailog/ngDialog-theme-default.css">
+  <script src="ngDailog/ngDialog.js"></script>
+  <!-- ngDailogbox configuration end here -->
+  
+  
+<script type="text/javascript" src="./app/app.js"></script>
+<script type="text/javascript" src="./app/controllers/taskmanagerController.js"></script>
+<script type="text/javascript" src="./app/services/taskmanagerService.js"></script>
+<script type="text/javascript" src="./app/controllers/paginationcontroller.js"></script>
+<script type="text/javascript" src="./app/services/paginationFactory.js"></script>
+<script type="text/javascript" src="./app/controllers/fileUploadController.js"></script>
+<script type="text/javascript" src="./app/services/fileUploadFactory.js"></script>
+
+  <!-- pagination configuration starts here -->
+  <link rel="stylesheet" href="paginationstub/bootstrap-3.3.4.min.css">
+    <link rel="stylesheet" href="paginationstub/ng-table@2.0.2.min.css">
+    <script src="paginationstub/angular-sanitize-1.4.2.js"></script>
+    <script src="paginationstub/ng-table@2.0.2.min.js"></script>
+    <script src="paginationstub/embed-codepen.min.js"></script>
+    <script src="paginationstub/angular-social.js"></script>
+ <!-- pagination configuration end here -->
+</head>
+<body>
+
+<div ng-view ></div>
+</body>
+</html>

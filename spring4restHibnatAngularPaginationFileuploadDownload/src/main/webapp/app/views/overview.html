@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col col-lg-6">
+
+        <h3>Example</h3>
+        <div>
+		
+		       <button ng-click="addPerson()" class="btn-panel">Add Person</button>
+
+            <table ng-table="vm.tableParams" class="table" show-filter="true">
+                <tr ng-repeat="user in $data">
+                    <td title="'First Name'" filter="{ firstName: 'text'}" sortable="'firstName'">
+                        {{user.firstName}}
+                    </td>
+                    <td title="'Last Name '" filter="{ lastName: 'text'}" sortable="'lastName'">
+                        {{user.lastName}}
+                    </td>
+					<td>
+					<button ng-click="editPersonInfo(user)" class="btn-panel">Edit Person</button>
+					</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/ng-template" id="addPersonTemplate">
+       <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form ng-submit="addPersonDet(personalDetails)">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First name" ng-model="personalDetails.firstName" required>   
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last name" ng-model="personalDetails.lastName" required>   
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email" ng-model="personalDetails.email" required>  
+                            </div>
+                            <div class="clearfix">
+                                <input type="submit" value="Submit" class="btn btn-primary">    
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </script>
