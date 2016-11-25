@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.osi.bean.TaskBean" table="task_list">
+<id column="task_id" name="taskId">
+<generator class="increment"></generator>
+ </id>
+ <property name="taskName" type="string" column="task_name"></property>
+ <property name="taskDescription" type="string" column="task_description"></property>
+ <property name="taskPriority" type="string" column="task_priority"></property>
+ <property name="taskStatus" type="string" column="task_status"></property>
+ <property name="taskStartTime" type="string" column="task_start_time"></property>
+ <property name="taskEndTime" type="string" column="task_end_time"></property>
+ <property name="taskArchived" type="int" column="task_archived"></property>
+</class>
+</hibernate-mapping>
