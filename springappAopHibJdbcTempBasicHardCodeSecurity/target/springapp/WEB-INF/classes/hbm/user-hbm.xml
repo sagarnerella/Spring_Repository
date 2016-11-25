@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.osi.pojo.UserLogin" table="userreg">
+<id column="id" name="userId">
+<generator class="increment"></generator>
+ </id>
+ <property name="userName" type="string" column="user_name"></property>
+ <property name="password" type="string" column="user_password"></property>
+</class>
+</hibernate-mapping>
