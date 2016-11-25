@@ -1,0 +1,149 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd  
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<context:component-scan base-package="com.osi.controller"></context:component-scan>
+	<context:component-scan base-package="com.osi.bean"></context:component-scan>
+	<context:component-scan base-package="com.osi.dao"></context:component-scan>
+	<context:component-scan base-package="com.osi.service"></context:component-scan>
+	
+	 <mvc:annotation-driven />
+	 
+	 <mvc:default-servlet-handler/>
+	 
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+	 <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/> 
+	 <property name="prefix" value="/jsp/" /> 
+	 <property name="suffix" value=".jsp" />
+	 </bean> 
+	 
+	 <bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://192.168.24.162:3306/taskmanager"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>
+	</bean>
+    <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" scope="singleton">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+		<list>
+		<value>hbm/task-hbm.xml</value>
+		</list>
+		</property>
+	</bean>
+	 
+	 
+	<!-- <mvc:interceptors>
+	<bean class="com.osi.interceptor.AuthunticateInterceptor"></bean>
+	</mvc:interceptors> -->
+	
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+  Student class contain name,age @Required Annotation for setter method, to test this try without passing age or name while defining the bean
+ <bean id="student" class="com.osi.bean.Student">
+      <property name="name"  value="Zara" />
+
+      try without passing age and check the result  =  Caused by: org.springframework.beans.factory.BeanInitializationException: Property 'age' is required for bean 'student'
+      <property name="age"  value="11"/>
+   </bean>
+ 
+ Definition for qualifier1 bean
+   <bean id="qualifier1" class="com.osi.bean.QualifierBean">
+      <property name="qualifierName"  value="Zara" />
+      <property name="qualifierAge"  value="11"/>
+   </bean>
+
+   Definition for qualifier2 bean
+   <bean id="qualifier2" class="com.osi.bean.QualifierBean">
+      <property name="qualifierName"  value="Nuha" />
+      <property name="qualifierAge"  value="2"/>
+   </bean>
+ <mvc:resources location="/resources/**" mapping="resources/asset"></mvc:resources>
+ 
+ 
+ <bean id="loggingAspect" class="com.osi.aspect.LoggingAspect"></bean>
+ <aop:config proxy-target-class="true">
+ <aop:aspect id="apectId" ref="loggingAspect">
+ <aop:pointcut expression="execution(* com.osi.bean.*.*())" id="loggingPointCut"/>
+ <aop:around method="logMethodProcess" pointcut-ref="loggingPointCut"/>
+ <aop:after-throwing method="printError" pointcut-ref="loggingPointCut"  throwing="ex"/>
+ </aop:aspect>
+ </aop:config>
+ 
+ 
+ <bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://192.168.24.162:3306/test"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>
+	</bean>
+ <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" scope="singleton">
+		<property name="dataSource" ref="myDataSource" />
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+		<list>
+		<value>hbm/user-hbm.xml</value>
+		</list>
+		</property>
+	</bean> -->
+	
+	<!-- similarly, don't forget the PlatformTransactionManager -->
+    <!-- <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean> 
+    ( or )
+    
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+</bean>
+    
+    -->
+	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
+    <!-- <tx:advice id="txAdvice" transaction-manager="txManager">
+        the transactional semantics...
+        <tx:attributes>
+            all methods starting with 'get' are read-only
+            <tx:method name="get*" read-only="true"/>
+            other methods use the default transaction settings (see below)
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice> -->
+
+    <!-- ensure that the above transactional advice runs for any execution
+        of an operation defined by the FooService interface -->
+    <!-- <aop:config>
+        <aop:pointcut id="fooServiceOperation" expression="execution(* x.y.service.FooService.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation"/>
+    </aop:config> -->
+	
+	<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+	<property name="dataSource" ref="myDataSource"></property>  
+	</bean>   -->
+	
+</beans>
