@@ -1,0 +1,50 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd  
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<context:component-scan base-package="com.osi.controller"></context:component-scan>
+	<context:component-scan base-package="com.osi.bean"></context:component-scan>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+ <!--  Student class contain name,age @Required Annotation for setter method, to test this try without passing age or name while defining the bean -->
+ <bean id="student" class="com.osi.bean.Student">
+      <property name="name"  value="Zara" />
+
+      <!-- try without passing age and check the result  =  Caused by: org.springframework.beans.factory.BeanInitializationException: Property 'age' is required for bean 'student'-->
+      <property name="age"  value="11"/>
+   </bean>
+ 
+ <!-- Definition for qualifier1 bean -->
+   <bean id="qualifier1" class="com.osi.bean.QualifierBean">
+      <property name="qualifierName"  value="Zara" />
+      <property name="qualifierAge"  value="11"/>
+   </bean>
+
+   <!-- Definition for qualifier2 bean -->
+   <bean id="qualifier2" class="com.osi.bean.QualifierBean">
+      <property name="qualifierName"  value="Nuha" />
+      <property name="qualifierAge"  value="2"/>
+   </bean>
+ <!-- <mvc:resources location="/resources/**" mapping="resources/asset"></mvc:resources> -->
+ 
+ 
+ <bean id="loggingAspect" class="com.osi.aspect.LoggingAspect"></bean>
+ <aop:config proxy-target-class="true">
+ <aop:aspect id="apectId" ref="loggingAspect">
+ <aop:pointcut expression="execution(* com.osi.bean.*.*())" id="loggingPointCut"/>
+ <aop:around method="logMethodProcess" pointcut-ref="loggingPointCut"/>
+ <aop:after-throwing method="printError" pointcut-ref="loggingPointCut"  throwing="ex"/>
+ </aop:aspect>
+ </aop:config>
+</beans>
