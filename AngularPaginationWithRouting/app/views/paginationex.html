@@ -1,0 +1,25 @@
+
+
+
+
+<div ng-controller="PaginationDemoCtrl">
+    <table id="mytable" class="table">
+      <thead>
+        <tr class="table-head">
+          <th>Name</th>
+		  <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="person in aCandidates">
+          <td>
+            <div>{{person.request_category_name}}</div>
+          </td>
+		  <td>
+            <div>{{person.priority_name}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></uib-pagination>
+  </div>
